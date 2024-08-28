@@ -1,8 +1,10 @@
 import express from 'express';
-import { PORT } from './config'
-import authRoutes from './routes/autentication'
+import authRoutes from './routes/autentication.js'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser';
+import { config } from 'dotenv';
+
+config()
 
 const app = express();
 
@@ -14,6 +16,8 @@ app.use('/auth', authRoutes);
 
 app.get('/', (_, res) => res.send('Hello, World!'))
 
-app.listen(PORT);
+const port = process.env.PORT || 3000;
 
-console.log(`Server is running on port ${PORT}`);
+app.listen(port);
+
+console.log(`Server is running on port ${port}`);
